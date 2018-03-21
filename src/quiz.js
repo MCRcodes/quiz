@@ -14,13 +14,16 @@ function Quiz(questions, name) {
   };
   
   Quiz.prototype.readCurrentQuestion = function readCurrentQuestion() {
+    if (this.isFinished) {
+        return 'Game Over';
+    }
     return this.questions[this.currentQuestionIndex].challenge;
   }
   
   Quiz.prototype.verifyCurrentQuestion = function verifyCurrentQuestion(guess) {
-    /*if (this.isFinished) {
-        return('Game Over');
-    } */
+    if (this.isFinished) {
+      return 'Game Over';
+    }
     const isCorrect = this.questions[this.currentQuestionIndex].verify(guess);
     this.moveNextQuestion();
     if (isCorrect) {
@@ -32,20 +35,6 @@ function Quiz(questions, name) {
   Quiz.prototype.moveNextQuestion = function moveNextQuestion() {
     this.currentQuestionIndex ++;
   }
-
-  /* Quiz.prototype.isFinished = function isFinished() {
-    return this.currentQuestionIndex >= this.questions.length;
-  }; */
-
-  
-
-  /* Quiz.prototype.trackScore = function(answer) {
-    if(this.readCurrentQuestion().verify(guess)) {
-        this.score++;
-        console.log(this.score++);
-    }
-    this.currentQuestionIndex++;
-  } */
 
   /* Quiz.prototype.highScores = function highScores() {
     quizScores.sort(function(a, b){return a.score - b.score});

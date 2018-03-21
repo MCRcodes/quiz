@@ -17,6 +17,11 @@ describe('Quiz constructor', () => {
 });
 
 describe('readCurrentQuestion', () => {
+  it('returns Game Over if quiz is finished', () => {
+    const quiz = new Quiz(jest.fn());
+    quiz.currentQuestionIndex = 2;
+    expect(quiz.readCurrentQuestion()).toBe('Game Over');
+  });
   it('returns the challenge of the current question', () => {
     const mockChallenge = jest.fn();
     const questions = [{ challenge: mockChallenge }];
@@ -27,6 +32,11 @@ describe('readCurrentQuestion', () => {
 });
 
 describe('verifyCurrentQuestion', () => {
+  it('returns Game Over if quiz is finished', () => {
+    const quiz = new Quiz(jest.fn());
+    quiz.currentQuestionIndex = 2;
+    expect(quiz.verifyCurrentQuestion()).toBe('Game Over');
+  });
   it('verifies the guess against the current question', () => {
     const mockGuess = jest.fn();
     const mockVerifyValue = jest.fn();
