@@ -1,9 +1,11 @@
+/* eslint-env jest */
 const Quiz = require('../src/quiz');
+const Player = require('../src/player');
 
 describe('Quiz constructor', () => {
   it('has the given list of questions', () => {
     const questions = [jest.fn(), jest.fn()];
-    const quiz = new Quiz(questions);
+    const quiz = new Quiz(questions, jest.fn());
     expect(quiz.questions).toEqual(questions);
   });
   it('sets the name property',() => {
@@ -19,7 +21,7 @@ describe('Quiz constructor', () => {
 describe('readCurrentQuestion', () => {
   it('returns Game Over if quiz is finished', () => {
     const quiz = new Quiz(jest.fn());
-    quiz.currentQuestionIndex = 2;
+    quiz.currentQuestionIndex = 8;
     expect(quiz.readCurrentQuestion()).toBe('Game Over');
   });
   it('returns the challenge of the current question', () => {
@@ -34,7 +36,7 @@ describe('readCurrentQuestion', () => {
 describe('verifyCurrentQuestion', () => {
   it('returns Game Over if quiz is finished', () => {
     const quiz = new Quiz(jest.fn());
-    quiz.currentQuestionIndex = 2;
+    quiz.currentQuestionIndex = 8;
     expect(quiz.verifyCurrentQuestion()).toBe('Game Over');
   });
   it('verifies the guess against the current question', () => {
@@ -113,8 +115,13 @@ describe('isFinished',() => {
   })
 });
 
-/* describe('trackScore', () => {
-  it('keeps track of the games score', () => {
+describe('quizHighScore', () => {
+  it('sets new high score for a quiz', () => {
+    const player = new Player('Clover', jest.fn());
+    const quiz = new Quiz(jest.fn(),jest.fn(), player);
+    quiz.score = 5;
+    quiz.name = 'Science Quiz';
 
+    expect(quiz.quizHighScore()).toEqual('Well done Clover! New High Score of 5 for Science Quiz achieved.');
   });
-});*/
+});

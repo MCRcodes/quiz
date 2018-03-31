@@ -20,6 +20,6 @@
     "jest": "^23.0.0-alpha.0"
   },
   "dependencies": {
-    "npm": "^5.7.1"
+    "npm": "^5.8.0"
   }
 }

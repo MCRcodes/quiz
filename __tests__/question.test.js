@@ -1,3 +1,4 @@
+/* eslint-env jest */
 const Question = require('../src/question');
 
 describe('constructor', () => {
