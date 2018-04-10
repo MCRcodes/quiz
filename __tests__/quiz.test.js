@@ -21,7 +21,7 @@ describe('Quiz constructor', () => {
 describe('readCurrentQuestion', () => {
   it('returns Game Over if quiz is finished', () => {
     const quiz = new Quiz(jest.fn());
-    quiz.currentQuestionIndex = 8;
+    quiz.currentQuestionIndex = 5;
     expect(quiz.readCurrentQuestion()).toBe('Game Over');
   });
   it('returns the challenge of the current question', () => {
@@ -36,7 +36,7 @@ describe('readCurrentQuestion', () => {
 describe('verifyCurrentQuestion', () => {
   it('returns Game Over if quiz is finished', () => {
     const quiz = new Quiz(jest.fn());
-    quiz.currentQuestionIndex = 8;
+    quiz.currentQuestionIndex = 5;
     expect(quiz.verifyCurrentQuestion()).toBe('Game Over');
   });
   it('verifies the guess against the current question', () => {
@@ -53,7 +53,6 @@ describe('verifyCurrentQuestion', () => {
     expect(result).toEqual(mockVerifyValue);
     expect(mockQuestion.verify).toHaveBeenCalledWith(mockGuess);
   });
-
   it('increases the score if correct', () => {
     const mockQuestion = {
         verify: jest.fn(() => true),
@@ -65,7 +64,6 @@ describe('verifyCurrentQuestion', () => {
 
     expect(quiz.score).toEqual(1);
   });
-
   it('does not increase the score if incorrect', () => {
     const mockQuestion = {
         verify: jest.fn(() => false),
@@ -76,6 +74,18 @@ describe('verifyCurrentQuestion', () => {
     quiz.verifyCurrentQuestion(jest.fn());
 
     expect(quiz.score).toEqual(0);
+  });
+  it('sets new high score for a quiz', () => {
+    const player = new Player('Clover', jest.fn());
+    const quiz = new Quiz(jest.fn(),jest.fn(), player);
+    quiz.score = 5;
+    quiz.name = 'Science Quiz';
+
+    quiz.isHighScore === true;
+
+    quiz.setHighScore()
+
+    expect(quiz.verifyCurrentQuestion()).toEqual('Well done Clover! New High Score of 5 for Science Quiz achieved.');
   });
 });
 
@@ -109,19 +119,40 @@ describe('isFinished',() => {
     const questions = [mockQuestion1, mockQuestion2];
 
     const quiz = new Quiz(questions);
-    quiz.currentQuestionIndex = 2;
+    quiz.currentQuestionIndex = 5;
 
     expect(quiz.isFinished).toBe(true);
   })
 });
 
-describe('quizHighScore', () => {
-  it('sets new high score for a quiz', () => {
-    const player = new Player('Clover', jest.fn());
-    const quiz = new Quiz(jest.fn(),jest.fn(), player);
-    quiz.score = 5;
-    quiz.name = 'Science Quiz';
+describe('isHighScore',() => {
+  it('returns false if quiz score is not high score', () => {
+    const quiz = new Quiz(jest.fn());
+    quiz.highScore = 3;
 
-    expect(quiz.quizHighScore()).toEqual('Well done Clover! New High Score of 5 for Science Quiz achieved.');
-  });
+    quiz.score = 2
+
+    expect(quiz.isHighScore()).toBe(false);
+  })
+  it('returns true if the quiz score is the quiz high score', () => {
+    const quiz = new Quiz(jest.fn());
+    quiz.highScore = 2;
+
+    quiz.score = 3;
+
+    expect(quiz.isHighScore()).toBe(true);
+  })
+});
+
+describe('setHighScore',() => {
+  it('sets high score for quiz', () => {
+    const quiz = new Quiz(jest.fn());
+    // quiz.highScore = 3;
+
+    quiz.score = 4
+
+    quiz.setHighScore()
+
+    expect(quiz.highScore).toEqual(4);
+  })
 });

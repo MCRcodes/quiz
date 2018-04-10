@@ -6,13 +6,15 @@ function Player(name) {
 Player.prototype = {
   isHighscore() {
     let isHighscore = false;
-    if (this._highScores.length === 0) {
+    if (this._highScores.length < 2) {
         isHighscore = true;
     } else {
         //get the score last in the list
-        const lastScore = this._highScores[this._highScores.length - 1].score;
+        // const lastScore = this._highScores[this._highScores.length - 1];
+        const lastScore = this._highScores[this._highScores.length - 1];
+        console.log(lastScore);
         //check if highscore
-        if (parseFloat(this._highScores.score) < parseFloat(lastScore) || this._highScores.length < 2) {
+        if (parseFloat(this._highScores) < parseFloat(lastScore)) {
             isHighscore = true;
         }
     }
@@ -29,7 +31,7 @@ Player.prototype = {
         quiz: quiz,
         score: score
       })
-      this._highScores = this._highScores.sort(function(a, b) {return a.score - b.score;});
+      this._highScores.sort(function(a, b) {return a.score - b.score;});
     }
   },
   getHighScore() {

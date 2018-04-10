@@ -3,7 +3,7 @@ const Player = require('../src/player');
 
 describe('Player constructor', () => {
   it('has a name property',() => {
-    const player = new Player('Clover', jest.fn());
+    const player = new Player('Clover');
     expect(player.name).toEqual('Clover');
   });
   it('has an empty high scores array', () => {
@@ -13,22 +13,22 @@ describe('Player constructor', () => {
 });
 
 describe('Is high score method', () => {
-  it('returns true if empty high scores array', () => {
-    const player = new Player('Clover');
-    const _highScores = [];
-    expect(player.isHighscore()).toBe(true);
-  });
   it('returns true if high scores array length less than 2', () => {
     const player = new Player('Clover');
-    const _highScores = [jest.fn()];
-    _highScores.length = 2
-    expect(player.isHighscore()).toBe(true);
+    player._highScores = [jest.fn()];
+    player._highScores.length = 1
+    expect(player.isHighscore).toBe(true);
   });
   it('returns true if current score higher than lowest in array', () => {
-    const player = new Player('Clover');
-    const _highScores = [jest.fn(), jest.fn()];
-    _highScores[1].score = 2
-    _highScores[0].score = 4
+    const player = jest.fn();
+
+    player._highScores[1].score = 2
+    player._highScores[0].score = 4 
+
+    const score = 5;
+
+    player.isHighscore();
+    
     expect(player.isHighscore()).toBe(true);
   });
 });

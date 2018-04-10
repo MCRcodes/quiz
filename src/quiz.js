@@ -1,5 +1,5 @@
 const INITIAL_SCORE = 0;
-const HIGH_SCORE = 1;
+const HIGH_SCORE = 0;
 
 function Quiz(questions, name, player) {
   this.questions = questions;
@@ -32,6 +32,10 @@ Quiz.prototype.verifyCurrentQuestion = function verifyCurrentQuestion(guess) {
   if (isCorrect) {
     this.score++;
   }
+  if (this.isFinished && this.isHighScore) {
+    this.setHighScore();
+    return (`Well done ${this.player.name}! New High Score of ${this.highScore} for ${this.name} achieved.`);
+  }
   return isCorrect;
 }
 
@@ -39,19 +43,18 @@ Quiz.prototype.moveNextQuestion = function moveNextQuestion() {
   this.currentQuestionIndex ++;
 }
 
-Quiz.prototype.highScores = function highScores() {
+Quiz.prototype.checkhighScores = function checkhighScores() {
   if (this.isFinished) {
     this.player.saveHighScore(this.name, this.score);
   }
 } 
 
-Quiz.prototype.quizHighScore = function quizHighScore() {
-  if (this.isFinished) {
-    if (this.score > this.highScore) {
-      this.highScore = this.score;
-      return (`Well done ${this.player.name}! New High Score of ${this.highScore} for ${this.name} achieved.`);
-    }
-  }
+Quiz.prototype.isHighScore = function isHighScore() {
+  return this.score > this.highScore
 } 
+
+Quiz.prototype.setHighScore = function setHighScore() {
+  this.highScore = this.score;
+}
   
 module.exports = Quiz;
