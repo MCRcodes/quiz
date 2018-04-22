@@ -76,7 +76,7 @@ describe('verifyCurrentQuestion', () => {
     expect(quiz.score).toEqual(0);
   });
   it('sets new high score for a quiz', () => {
-    const player = new Player('Clover', jest.fn());
+    const player = new Player('Clover');
     const quiz = new Quiz(jest.fn(),jest.fn(), player);
     quiz.score = 5;
     quiz.name = 'Science Quiz';
@@ -138,7 +138,7 @@ describe('isHighScore',() => {
     const quiz = new Quiz(jest.fn());
     quiz.highScore = 2;
 
-    quiz.score = 3;
+    quiz.score = 5;
 
     expect(quiz.isHighScore()).toBe(true);
   })

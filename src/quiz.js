@@ -24,6 +24,8 @@ Quiz.prototype.readCurrentQuestion = function readCurrentQuestion() {
 }
   
 Quiz.prototype.verifyCurrentQuestion = function verifyCurrentQuestion(guess) {
+  const player = this.player;
+
   if (this.isFinished) {
     return 'Game Over';
   }
@@ -32,9 +34,9 @@ Quiz.prototype.verifyCurrentQuestion = function verifyCurrentQuestion(guess) {
   if (isCorrect) {
     this.score++;
   }
-  if (this.isFinished && this.isHighScore) {
+  if (this.isFinished && this.isHighScore()) {
     this.setHighScore();
-    return (`Well done ${this.player.name}! New High Score of ${this.highScore} for ${this.name} achieved.`);
+    return (`Well done ${this.player}! New High Score of ${this.highScore} for ${this.name} achieved.`);
   }
   return isCorrect;
 }

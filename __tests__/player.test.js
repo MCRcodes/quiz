@@ -17,17 +17,19 @@ describe('Is high score method', () => {
     const player = new Player('Clover');
     player._highScores = [jest.fn()];
     player._highScores.length = 1
-    expect(player.isHighscore).toBe(true);
+
+    expect(player.isHighscore()).toBe(true);
   });
   it('returns true if current score higher than lowest in array', () => {
-    const player = jest.fn();
+    const player = new Player('Clover');
+    player._highScores = [jest.fn()];
 
-    player._highScores[1].score = 2
-    player._highScores[0].score = 4 
+    player._highScores[1] = 2
+    player._highScores[0] = 4 
 
     const score = 5;
 
-    player.isHighscore();
+    //player.isHighscore();
     
     expect(player.isHighscore()).toBe(true);
   });

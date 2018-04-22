@@ -10,7 +10,6 @@ Player.prototype = {
         isHighscore = true;
     } else {
         //get the score last in the list
-        // const lastScore = this._highScores[this._highScores.length - 1];
         const lastScore = this._highScores[this._highScores.length - 1];
         console.log(lastScore);
         //check if highscore
