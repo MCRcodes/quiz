@@ -1,0 +1,22 @@
+{
+  "name": "quiz-challenge",
+  "version": "1.0.0",
+  "description": "Your challenge is to make an object-oriented quiz game using TDD and the following user stories.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --verbose --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MCRcodes/quiz-challenge.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MCRcodes/quiz-challenge/issues"
+  },
+  "homepage": "https://github.com/MCRcodes/quiz-challenge#readme",
+  "devDependencies": {
+    "jest": "^24.5.0"
+  }
+}
