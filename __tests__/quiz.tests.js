@@ -1,13 +1,21 @@
 const Quiz = require('../src/quiz');
 
-describe('a quiz gets instantiated', () => {
-  const question = { 
+let question;
+let questions;
+let quiz;
+
+beforeAll( () => {
+  question = { 
     challenge: 'challenge',
     answer: 'answer',
+    verifyAnswer: jest.fn(),
   };
-  const questions = [question, question];
-  const quiz = new Quiz('name', questions);
+  questions = [question, question];
+  quiz = new Quiz('name', questions);
   
+});
+
+describe('a quiz gets instantiated', () => {
   it('it is a list of questions', () => {
     expect(quiz).toBeInstanceOf(Object);
   });
@@ -23,4 +31,18 @@ describe('a quiz gets instantiated', () => {
   it('contains a list of questions', () => {
     expect(quiz.questions).toEqual([question, question]);
   })
+});
+
+describe('can read a question', () => {
+  it('has a readQuestion method', () => {
+    expect(quiz.readQuestion()).toBe(quiz.questions[0].challenge);
+  });
+});
+
+describe('can answer a question', () => {
+  it('answerCurrentQuestion method', () => {
+    // console.log(quiz.questions[0].answerCurrentQuestion('guess'));
+    expect(quiz.answerCurrentQuestion('guess')).toBe(quiz.questions[0].verifyAnswer('guess'));
+    // .toHaveBeenCalledWith(quiz.questions[0].verifyAnswer);
+  });
 });
