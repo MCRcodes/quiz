@@ -4,15 +4,14 @@ let question;
 let questions;
 let quiz;
 
-beforeAll( () => {
-  question = { 
+beforeAll(() => {
+  question = {
     challenge: 'challenge',
     answer: 'answer',
     verifyAnswer: jest.fn(),
   };
   questions = [question, question];
   quiz = new Quiz('name', questions);
-  
 });
 
 describe('a quiz gets instantiated', () => {
@@ -30,7 +29,7 @@ describe('a quiz gets instantiated', () => {
 
   it('contains a list of questions', () => {
     expect(quiz.questions).toEqual([question, question]);
-  })
+  });
 });
 
 describe('can read a question', () => {

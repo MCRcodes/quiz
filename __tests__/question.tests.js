@@ -1,24 +1,24 @@
 const Question = require('../src/question');
 
 describe('question', () => {
-  const challenge = 'challenge'
-  const answer = 'answer'
+  const challenge = 'challenge';
+  const answer = 'answer';
   const question = new Question(challenge, answer);
- it('instantiates a question', () => {
-  expect(question).toBeInstanceOf(Object);
- });
- it('has a challenge property', () => {
-  expect(question).toHaveProperty('challenge');
- });
- it('has a answer property', () => {
-  expect(question).toHaveProperty('answer');
- });
- it('challenge contains a string', () => {
-  expect(question.challenge).toBeTruthy();
- });
- it('answer contains a string', () => {
-  expect(question.answer).toBeTruthy();
- });
+  it('instantiates a question', () => {
+    expect(question).toBeInstanceOf(Object);
+  });
+  it('has a challenge property', () => {
+    expect(question).toHaveProperty('challenge');
+  });
+  it('has a answer property', () => {
+    expect(question).toHaveProperty('answer');
+  });
+  it('challenge contains a string', () => {
+    expect(question.challenge).toBeTruthy();
+  });
+  it('answer contains a string', () => {
+    expect(question.answer).toBeTruthy();
+  });
 });
 describe('verifying answers', () => {
   let question;
